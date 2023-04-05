@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.moviez.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.example.moviez.ui.topRated.TopRatedFragment"
+        android:label="@string/title_top_rated"
+        tools:layout="@layout/fragment_top_rated" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.moviez.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.example.moviez.ui.fav.FavFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_fav" />
 </navigation>
