@@ -11,5 +11,9 @@ interface MoviezRepo {
 
     suspend fun getMovieDetails(movieId: Int): MovieDetailsResponse
 
-    suspend fun searchMoviesByName(movieName: String): MovieListResponse
+    suspend fun searchMovieByName(
+        page: Int,
+        includeAdult: Boolean,
+        movieName: String
+    ): MovieListResponse
 }

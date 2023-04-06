@@ -12,6 +12,6 @@ class SearchByNameUseCase(private val moviezRepo: MoviezRepo) :
     )
 
     override suspend fun execute(params: Params): MovieListResponse {
-        return moviezRepo.searchMoviesByName(params.movieName)
+        return moviezRepo.searchMovieByName(params.movieName)
     }
 }
