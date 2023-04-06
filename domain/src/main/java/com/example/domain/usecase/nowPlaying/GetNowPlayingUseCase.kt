@@ -1,6 +1,5 @@
 package com.example.domain.usecase.nowPlaying
 
-import com.example.domain.entity.movieList.MovieListResponse
 import com.example.domain.entity.nowPlaying.NowPlayingResponse
 import com.example.domain.repo.MoviezRepo
 import com.example.domain.usecase.BaseUseCase
