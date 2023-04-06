@@ -11,4 +11,18 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="Circular">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="TopCurvedRect">
+        <item name="cornerSizeTopRight">4%</item>
+        <item name="cornerSizeTopLeft">4%</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#CCE1F5</item>
+        <item name="colorControlActivated">#FFBC53</item>
+    </style>
 </resources>
