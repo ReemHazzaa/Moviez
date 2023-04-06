@@ -1,4 +1,4 @@
-package com.example.data.remote
+package com.example.data.remote.apiService
 
 import com.example.domain.entity.movieDetails.MovieDetailsResponse
 import com.example.domain.entity.movieList.MovieListResponse
@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiService {
+interface MoviezApiService {
     @GET("movie/top_rated")
     suspend fun getTopRated(
         @Query("page") page: Int
