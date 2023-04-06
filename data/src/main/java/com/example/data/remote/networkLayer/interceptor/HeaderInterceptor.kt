@@ -1,7 +1,7 @@
 package com.example.data.remote.networkLayer.interceptor
 
-import com.example.moviez.networkLayer.NetworkFailure
-import com.example.moviez.networkLayer.NetworkManager
+import com.example.data.remote.networkLayer.NetworkFailure
+import com.example.data.remote.networkLayer.NetworkManager
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
