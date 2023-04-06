@@ -5,7 +5,7 @@ import com.example.domain.entity.movieList.MovieListResponse
 import com.example.domain.entity.nowPlaying.NowPlayingResponse
 
 interface MoviezRepo {
-    suspend fun getTopRated(): MovieListResponse
+    suspend fun getTopRated(page: Int): MovieListResponse
 
     suspend fun getNowPlaying(): NowPlayingResponse
 
