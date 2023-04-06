@@ -3,8 +3,9 @@ package com.example.domain.usecase.nowPlaying
 import com.example.domain.entity.nowPlaying.NowPlayingResponse
 import com.example.domain.repo.MoviezRepo
 import com.example.domain.usecase.BaseUseCase
+import javax.inject.Inject
 
-class GetNowPlayingUseCase(private val moviezRepo: MoviezRepo) :
+class GetNowPlayingUseCase @Inject constructor(private val moviezRepo: MoviezRepo) :
     BaseUseCase<GetNowPlayingUseCase.Params, NowPlayingResponse>() {
 
     data class Params(

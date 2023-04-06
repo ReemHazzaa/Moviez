@@ -3,8 +3,9 @@ package com.example.domain.usecase.topRated
 import com.example.domain.entity.movieList.MovieListResponse
 import com.example.domain.repo.MoviezRepo
 import com.example.domain.usecase.BaseUseCase
+import javax.inject.Inject
 
-class GetTopRatedUseCase(private val moviezRepo: MoviezRepo) :
+class GetTopRatedUseCase @Inject constructor(private val moviezRepo: MoviezRepo) :
     BaseUseCase<GetTopRatedUseCase.Params, MovieListResponse>() {
 
     data class Params(
