@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.moviez.R
+import com.example.moviez.app.adapter.FavHomeAdapter
 import com.example.moviez.app.base.BaseFragment
 import com.example.moviez.app.entity.MovieItem
 import com.example.moviez.app.extensions.updateStatusBarColor
@@ -15,6 +17,7 @@ import com.example.moviez.app.utils.genericadapter.adapter.GeneralListAdapter
 import com.example.moviez.app.utils.genericadapter.listener.OnItemClickCallback
 import com.example.moviez.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
@@ -63,6 +66,12 @@ class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
                         findNavController().navigate(action)
                     }
                 })
+
+            lifecycleScope.launch {
+                mViewModel.readAllFav().observe(viewLifecycleOwner) { fav ->
+                    rvFav.adapter = FavHomeAdapter().apply { setData(fav) }
+                }
+            }
         }
     }
 
