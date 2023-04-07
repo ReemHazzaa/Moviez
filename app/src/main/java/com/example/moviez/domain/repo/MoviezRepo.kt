@@ -1,5 +1,7 @@
 package com.example.moviez.domain.repo
 
+import androidx.lifecycle.LiveData
+import com.example.moviez.app.entity.FavMovieItem
 import com.example.moviez.domain.entity.movieDetails.MovieDetailsResponse
 import com.example.moviez.domain.entity.movieList.MovieListResponse
 import com.example.moviez.domain.entity.nowPlaying.NowPlayingResponse
@@ -16,4 +18,10 @@ interface MoviezRepo {
         includeAdult: Boolean,
         movieName: String
     ): MovieListResponse
+
+    suspend fun getAllFavMovies() : LiveData<List<FavMovieItem>>
+
+    suspend fun insertFavItem(item: FavMovieItem)
+
+    suspend fun deleteFavItem(item: FavMovieItem)
 }
