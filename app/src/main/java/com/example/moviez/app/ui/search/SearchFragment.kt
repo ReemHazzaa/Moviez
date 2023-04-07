@@ -1,32 +1,66 @@
 package com.example.moviez.app.ui.search
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.databinding.library.baseAdapters.BR
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.moviez.R
+import com.example.moviez.app.base.BaseFragment
+import com.example.moviez.app.extensions.updateStatusBarColor
+import com.example.moviez.app.utils.genericadapter.Listable
+import com.example.moviez.app.utils.genericadapter.adapter.GeneralListAdapter
+import com.example.moviez.app.utils.genericadapter.listener.OnItemClickCallback
+import com.example.moviez.databinding.FragmentSearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SearchFragment : Fragment() {
+@AndroidEntryPoint
+class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>() {
+    override val layoutResId: Int = R.layout.fragment_search
+    override val mViewModel: SearchViewModel by viewModels()
 
-    companion object {
-        fun newInstance() = SearchFragment()
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    private lateinit var viewModel: SearchViewModel
+        requireActivity().updateStatusBarColor(R.color.grey_E3E2E5, false)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
+        viewDataBinding.apply {
+            setVariable(BR.viewModel, mViewModel)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-        // TODO: Use the ViewModel
+            searchView.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_home_to_searchFragment)
+            }
+
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    newText?.let {
+                        mViewModel.searchString.value = it
+                        mViewModel.searchByName(1, false, it)
+                    }
+                    return false
+                }
+
+            })
+
+            swipeRefresh.setOnRefreshListener {
+                swipeRefresh.isRefreshing = true
+                mViewModel.searchString.value?.let { mViewModel.searchByName(1, false, it) }
+                swipeRefresh.isRefreshing = false
+            }
+
+            rvResult.adapter =
+                GeneralListAdapter(context = requireContext(), onItemClickCallback = object :
+                    OnItemClickCallback {
+                    override fun onItemClicked(view: View, listableItem: Listable, position: Int) {
+
+                    }
+                })
+        }
     }
 
 }

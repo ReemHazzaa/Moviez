@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviez.R
 import com.example.moviez.app.base.BaseFragment
+import com.example.moviez.app.extensions.updateStatusBarColor
 import com.example.moviez.app.ui.SharedViewModel
 import com.example.moviez.app.utils.genericadapter.Listable
 import com.example.moviez.app.utils.genericadapter.adapter.GeneralListAdapter
@@ -32,6 +33,7 @@ class TopRatedFragment : BaseFragment<SharedViewModel, FragmentTopRatedBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().updateStatusBarColor(R.color.grey_E3E2E5)
         viewDataBinding.apply {
             setVariable(BR.viewModel, mViewModel)
 

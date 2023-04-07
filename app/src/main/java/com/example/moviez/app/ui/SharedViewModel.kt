@@ -1,6 +1,5 @@
 package com.example.moviez.app.ui
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.moviez.app.base.BaseViewModel
 import com.example.moviez.app.base.ObserveOnceLiveData

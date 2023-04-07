@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.moviez.R
 import com.example.moviez.app.base.BaseFragment
+import com.example.moviez.app.extensions.updateStatusBarColor
 import com.example.moviez.app.ui.SharedViewModel
 import com.example.moviez.app.utils.genericadapter.Listable
 import com.example.moviez.app.utils.genericadapter.adapter.GeneralListAdapter
@@ -25,8 +27,15 @@ class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().updateStatusBarColor(R.color.primaryColor, false)
+
         viewDataBinding.apply {
             setVariable(BR.viewModel, mViewModel)
+
+            searchView.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_home_to_searchFragment)
+            }
 
             swipeRefresh.setOnRefreshListener {
                 swipeRefresh.isRefreshing = true

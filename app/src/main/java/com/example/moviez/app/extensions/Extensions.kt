@@ -6,9 +6,6 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.ColorRes
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 
 fun Activity.updateStatusBarColor(@ColorRes colorId: Int, isLight: Boolean = true) {
 
@@ -30,12 +27,4 @@ fun Context.loadColor(@ColorRes id: Int): Int {
     }
 }
 
-fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
-    observe(lifecycleOwner, object : Observer<T> {
-        override fun onChanged(t: T) {
-            removeObserver(this)
-            observer.onChanged(t)
-        }
-    })
-}
 const val TAG = "Extensions"
