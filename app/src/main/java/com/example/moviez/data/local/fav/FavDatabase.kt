@@ -23,7 +23,8 @@ abstract class FavDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
-                FavDatabase::class.java, "fav_database"
+                FavDatabase::class.java,
+                "fav_database"
             )
                 .fallbackToDestructiveMigration()
                 .build()
