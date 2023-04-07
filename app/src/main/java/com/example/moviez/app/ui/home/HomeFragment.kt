@@ -20,7 +20,7 @@ class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel.getTopRated()
+        getTopRatedAndNowPlaying()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
 
             swipeRefresh.setOnRefreshListener {
                 swipeRefresh.isRefreshing = true
-                mViewModel.getTopRated()
+                getTopRatedAndNowPlaying()
                 swipeRefresh.isRefreshing = false
             }
 
@@ -41,6 +41,19 @@ class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
 
                     }
                 })
+
+            rvNowPlaying.adapter =
+                GeneralListAdapter(context = requireContext(), onItemClickCallback = object :
+                    OnItemClickCallback {
+                    override fun onItemClicked(view: View, listableItem: Listable, position: Int) {
+
+                    }
+                })
         }
+    }
+
+    private fun getTopRatedAndNowPlaying() {
+        mViewModel.getTopRated()
+        mViewModel.getNowPlaying()
     }
 }

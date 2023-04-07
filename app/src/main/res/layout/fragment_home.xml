@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.moviez.app.ui.SharedViewModel" />
@@ -34,7 +35,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_header"
@@ -107,12 +108,12 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_top_rated"
+                    submitData="@{viewModel.topRatedLiveData}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    submitData="@{viewModel.topRatedLiveData}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="@+id/guideline2"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -150,6 +151,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_now_playing"
+                    submitData="@{viewModel.nowPlayingLiveData}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="20dp"
