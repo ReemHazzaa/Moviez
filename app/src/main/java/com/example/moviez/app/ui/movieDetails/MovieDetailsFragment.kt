@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.moviez.R
 import com.example.moviez.app.base.BaseFragment
 import com.example.moviez.app.extensions.updateStatusBarColor
@@ -19,9 +20,11 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
     override val layoutResId: Int = R.layout.fragment_movie_details
     override val mViewModel: MovieDetailsViewModel by viewModels()
 
+    private val args: MovieDetailsFragmentArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel.getMovieDetails(772071)
+        mViewModel.getMovieDetails(args.movieID)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,10 +43,9 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDe
 
             swipeRefresh.setOnRefreshListener {
                 swipeRefresh.isRefreshing = true
-                mViewModel.getMovieDetails(772071)
+                mViewModel.getMovieDetails(args.movieID)
                 swipeRefresh.isRefreshing = false
             }
         }
-
     }
 }

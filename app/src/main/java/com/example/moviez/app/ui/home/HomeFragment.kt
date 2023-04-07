@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.moviez.R
 import com.example.moviez.app.base.BaseFragment
+import com.example.moviez.app.entity.MovieItem
 import com.example.moviez.app.extensions.updateStatusBarColor
 import com.example.moviez.app.ui.SharedViewModel
 import com.example.moviez.app.utils.genericadapter.Listable
@@ -47,7 +48,9 @@ class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
                 GeneralListAdapter(context = requireContext(), onItemClickCallback = object :
                     OnItemClickCallback {
                     override fun onItemClicked(view: View, listableItem: Listable, position: Int) {
-                        findNavController().navigate(R.id.action_navigation_home_to_movieDetailsFragment)
+                        val itemId = (listableItem as MovieItem).id
+                        val action = HomeFragmentDirections.actionNavigationHomeToMovieDetailsFragment(itemId)
+                        findNavController().navigate(action)
                     }
                 })
 
@@ -55,7 +58,9 @@ class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
                 GeneralListAdapter(context = requireContext(), onItemClickCallback = object :
                     OnItemClickCallback {
                     override fun onItemClicked(view: View, listableItem: Listable, position: Int) {
-
+                        val itemId = (listableItem as MovieItem).id
+                        val action = HomeFragmentDirections.actionNavigationHomeToMovieDetailsFragment(itemId)
+                        findNavController().navigate(action)
                     }
                 })
         }
