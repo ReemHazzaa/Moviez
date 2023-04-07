@@ -1,10 +1,7 @@
 package com.example.moviez.data.local.fav
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.moviez.app.entity.FavMovieItem
 
 @Dao
@@ -13,5 +10,8 @@ interface FavDao {
     suspend fun getAllFav(): LiveData<List<FavMovieItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFav(item: FavMovieItem)
+    suspend fun insertFavItem(item: FavMovieItem)
+
+    @Delete
+    suspend fun deleteFavItem(item: FavMovieItem)
 }
