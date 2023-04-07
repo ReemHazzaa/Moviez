@@ -1,32 +1,49 @@
 package com.example.moviez.app.ui.movieDetails
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.databinding.library.baseAdapters.BR
+import androidx.fragment.app.viewModels
 import com.example.moviez.R
+import com.example.moviez.app.base.BaseFragment
+import com.example.moviez.app.extensions.updateStatusBarColor
+import com.example.moviez.app.utils.genericadapter.Listable
+import com.example.moviez.app.utils.genericadapter.adapter.GeneralListAdapter
+import com.example.moviez.app.utils.genericadapter.listener.OnItemClickCallback
+import com.example.moviez.databinding.FragmentMovieDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MovieDetailsFragment : Fragment() {
+@AndroidEntryPoint
+class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel, FragmentMovieDetailsBinding>() {
 
-    companion object {
-        fun newInstance() = MovieDetailsFragment()
+    override val layoutResId: Int = R.layout.fragment_movie_details
+    override val mViewModel: MovieDetailsViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel.getMovieDetails(772071)
     }
 
-    private lateinit var viewModel: MovieDetailsViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().updateStatusBarColor(R.color.grey_E3E2E5, false)
+        viewDataBinding.apply {
+            setVariable(BR.viewModel, mViewModel)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie_details, container, false)
+            rvGenres.adapter =
+                GeneralListAdapter(context = requireContext(), onItemClickCallback = object :
+                    OnItemClickCallback {
+                    override fun onItemClicked(view: View, listableItem: Listable, position: Int) {
+
+                    }
+                })
+
+            swipeRefresh.setOnRefreshListener {
+                swipeRefresh.isRefreshing = true
+                mViewModel.getMovieDetails(772071)
+                swipeRefresh.isRefreshing = false
+            }
+        }
+
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MovieDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

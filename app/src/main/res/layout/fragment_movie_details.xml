@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.moviez.app.ui.movieDetails.MovieDetailsViewModel" />
+
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -19,6 +23,7 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_movie_image"
+                loadImageWithGlide="@{viewModel.detailsLiveData.imageUrl}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
@@ -60,8 +65,9 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="32dp"
+                        android:text="@{viewModel.detailsLiveData.title}"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="30sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +83,7 @@
                         android:layout_marginEnd="16dp"
                         android:backgroundTint="@color/white"
                         android:elevation="10dp"
+                        android:text="@{viewModel.detailsLiveData.overview}"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -94,6 +101,7 @@
                         android:drawableStart="@drawable/round_star_24"
                         android:drawableTint="@color/secondaryDarkColor"
                         android:elevation="10dp"
+                        android:text="@{viewModel.detailsLiveData.voteAvg}"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -112,6 +120,7 @@
                         android:drawableStart="@drawable/round_numbers_24"
                         android:drawableTint="@color/secondaryDarkColor"
                         android:elevation="10dp"
+                        android:text="@{viewModel.detailsLiveData.voteCount}"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -145,7 +154,7 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tv_all_instructors"
+                        android:id="@+id/tv_all_genres"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
@@ -160,6 +169,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_genres"
+                        submitData="@{viewModel.detailsLiveData.genres}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
@@ -168,7 +178,7 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_all_instructors"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_all_genres"
                         tools:listitem="@layout/item_genre" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

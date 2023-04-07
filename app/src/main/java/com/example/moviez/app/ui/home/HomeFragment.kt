@@ -47,7 +47,7 @@ class HomeFragment : BaseFragment<SharedViewModel, FragmentHomeBinding>() {
                 GeneralListAdapter(context = requireContext(), onItemClickCallback = object :
                     OnItemClickCallback {
                     override fun onItemClicked(view: View, listableItem: Listable, position: Int) {
-
+                        findNavController().navigate(R.id.action_navigation_home_to_movieDetailsFragment)
                     }
                 })
 
