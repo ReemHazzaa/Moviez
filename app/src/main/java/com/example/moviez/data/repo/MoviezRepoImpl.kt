@@ -8,6 +8,7 @@ import com.example.moviez.domain.entity.movieDetails.MovieDetailsResponse
 import com.example.moviez.domain.entity.movieList.MovieListResponse
 import com.example.moviez.domain.entity.nowPlaying.NowPlayingResponse
 import com.example.moviez.domain.repo.MoviezRepo
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
 class MoviezRepoImpl @Inject constructor(

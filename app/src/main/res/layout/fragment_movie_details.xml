@@ -139,7 +139,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/tv_count">
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btAddToWishlist"
+                            android:id="@+id/btAddToFav"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
