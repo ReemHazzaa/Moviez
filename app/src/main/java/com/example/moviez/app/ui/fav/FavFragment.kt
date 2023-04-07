@@ -1,42 +1,38 @@
 package com.example.moviez.app.ui.fav
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.databinding.library.baseAdapters.BR
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.example.moviez.R
+import com.example.moviez.app.adapter.FavAdapter
+import com.example.moviez.app.base.BaseFragment
+import com.example.moviez.app.extensions.updateStatusBarColor
 import com.example.moviez.databinding.FragmentFavBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-class FavFragment : Fragment() {
+@AndroidEntryPoint
+class FavFragment : BaseFragment<FavViewModel, FragmentFavBinding>() {
 
-    private var _binding: FragmentFavBinding? = null
+    override val layoutResId: Int = R.layout.fragment_fav
+    override val mViewModel: FavViewModel by viewModels()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val favAdapter = FavAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val favViewModel =
-            ViewModelProvider(this).get(FavViewModel::class.java)
-
-        _binding = FragmentFavBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        favViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().updateStatusBarColor(R.color.grey_E3E2E5, false)
+        viewDataBinding.apply {
+            setVariable(BR.viewModel, mViewModel)
         }
-        return root
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        lifecycleScope.launch {
+            mViewModel.readAllFav().observe(viewLifecycleOwner) { fav ->
+                favAdapter.setData(fav)
+                viewDataBinding.rvCourses.adapter = favAdapter
+            }
+        }
     }
 }

@@ -1,13 +1,13 @@
 package com.example.moviez.app.ui.fav
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.moviez.app.base.BaseViewModel
+import com.example.moviez.domain.usecase.readAllFromFavDB.ReadAllFromFavUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FavViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
+@HiltViewModel
+class FavViewModel @Inject constructor(
+    private val readAllFromFavUseCase: ReadAllFromFavUseCase
+) : BaseViewModel() {
+    suspend fun readAllFav() = readAllFromFavUseCase.execute("")
 }

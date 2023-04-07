@@ -3,73 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <import type="android.view.View" />
-
-        <variable
-            name="favMovie"
-            type="com.example.moviez.app.entity.FavMovieItem" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="150dp"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/rect_curved"
         android:backgroundTint="@color/white"
         android:elevation="10dp"
-        android:layout_marginBottom="5dp">
+        android:minHeight="200dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_movie_image"
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/actionModeSelectionCV"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            loadImageWithGlide="@{favMovie.imageUrl}"
-            app:shapeAppearanceOverlay="@style/CurvedRect"
+            android:alpha="0.2"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_movie"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rect_curved_left"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/LeftCurvedRect"
+            tools:backgroundTint="@color/secondaryColor" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="1.0" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.60" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_movie_name"
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@{favMovie.title}"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_vote_avg"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Movie name" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_vote_avg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/secondaryLightColor"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="@{favMovie.voteAvg}"
-            android:drawableStart="@drawable/round_star_24"
-            android:drawableTint="@color/secondaryLightColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_movie_name"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_movie_name"
-            tools:text="8.7" />
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Course Name Course Name Course Name Course Name" />
+
+        <TextView
+            android:id="@+id/tv_rate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/round_star_24"
+            app:drawableTint="@color/secondaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="7.8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
