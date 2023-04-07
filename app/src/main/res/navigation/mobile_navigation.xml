@@ -43,5 +43,9 @@
         android:id="@+id/movieDetailsFragment"
         android:name="com.example.moviez.app.ui.movieDetails.MovieDetailsFragment"
         android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" />
+        tools:layout="@layout/fragment_movie_details" >
+        <argument
+            android:name="movieID"
+            app:argType="integer" />
+    </fragment>
 </navigation>
