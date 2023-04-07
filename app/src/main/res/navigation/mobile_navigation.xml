@@ -33,7 +33,11 @@
         android:id="@+id/navigation_fav"
         android:name="com.example.moviez.app.ui.fav.FavFragment"
         android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_fav" />
+        tools:layout="@layout/fragment_fav" >
+        <action
+            android:id="@+id/action_navigation_fav_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.moviez.app.ui.search.SearchFragment"

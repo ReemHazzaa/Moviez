@@ -9,11 +9,14 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviez.R
 import com.example.moviez.app.base.BaseFragment
+import com.example.moviez.app.entity.MovieItem
 import com.example.moviez.app.extensions.updateStatusBarColor
 import com.example.moviez.app.ui.SharedViewModel
+import com.example.moviez.app.ui.home.HomeFragmentDirections
 import com.example.moviez.app.utils.genericadapter.Listable
 import com.example.moviez.app.utils.genericadapter.adapter.GeneralListAdapter
 import com.example.moviez.app.utils.genericadapter.listener.OnItemClickCallback
@@ -47,7 +50,9 @@ class TopRatedFragment : BaseFragment<SharedViewModel, FragmentTopRatedBinding>(
                 GeneralListAdapter(context = requireContext(), onItemClickCallback = object :
                     OnItemClickCallback {
                     override fun onItemClicked(view: View, listableItem: Listable, position: Int) {
-
+                        val itemId = (listableItem as MovieItem).id
+                        val action = TopRatedFragmentDirections.actionNavigationTopRatedToMovieDetailsFragment(itemId)
+                        findNavController().navigate(action)
                     }
                 })
         }

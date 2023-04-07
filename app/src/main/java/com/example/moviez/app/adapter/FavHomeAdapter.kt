@@ -5,9 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviez.R
 import com.example.moviez.app.entity.FavMovieItem
+import com.example.moviez.app.entity.MovieItem
+import com.example.moviez.app.ui.home.HomeFragmentDirections
 import com.example.moviez.app.utils.bindingadapters.ImageBindingAdapter.loadImageWithGlide
 
 class FavHomeAdapter :
@@ -36,7 +40,9 @@ class FavHomeAdapter :
             ivMovie.loadImageWithGlide(current.imageUrl)
 
             itemView.setOnClickListener {
-
+                val itemId = current.id
+                val action = HomeFragmentDirections.actionNavigationHomeToMovieDetailsFragment(itemId)
+                itemView.findNavController().navigate(action)
             }
         }
     }

@@ -5,9 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviez.R
 import com.example.moviez.app.entity.FavMovieItem
+import com.example.moviez.app.ui.fav.FavFragmentDirections
+import com.example.moviez.app.ui.home.HomeFragmentDirections
 import com.example.moviez.app.utils.bindingadapters.ImageBindingAdapter.loadImageWithGlide
 
 class FavAdapter :
@@ -36,7 +39,9 @@ class FavAdapter :
             ivMovie.loadImageWithGlide(current.imageUrl)
 
             itemView.setOnClickListener {
-
+                val itemId = current.id
+                val action = FavFragmentDirections.actionNavigationFavToMovieDetailsFragment(itemId)
+                itemView.findNavController().navigate(action)
             }
         }
     }
