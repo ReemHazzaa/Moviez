@@ -8,13 +8,13 @@ abstract class BaseViewModel :
     ViewModel() {
 
 
-    var progressLiveData: SingleLiveData<Boolean>? = SingleLiveData()
+    var progressLiveData: ObserveOnceLiveData<Boolean>? = ObserveOnceLiveData()
         private set
 
-    var failureLiveData: SingleLiveData<NetworkFailure>? = SingleLiveData()
+    var failureLiveData: ObserveOnceLiveData<NetworkFailure>? = ObserveOnceLiveData()
         private set
 
-    var toastRes: SingleLiveData<Int> = SingleLiveData()
+    var toastRes: ObserveOnceLiveData<Int> = ObserveOnceLiveData()
         private set
 
     fun showProgress() {
