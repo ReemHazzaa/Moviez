@@ -25,4 +25,8 @@
         <item name="colorControlNormal">#CCE1F5</item>
         <item name="colorControlActivated">#FFBC53</item>
     </style>
+
+    <style name="CurvedRect">
+        <item name="cornerSize">4%</item>
+    </style>
 </resources>

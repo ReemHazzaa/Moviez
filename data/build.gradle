@@ -64,5 +64,5 @@ dependencies {
     implementation "com.google.dagger:hilt-android:${hilt_ver}"
     kapt "com.google.dagger:hilt-compiler:${hilt_ver}"
 
-    implementation project(path: ':domain')
+//    implementation project(path: ':domain')
 }

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.moviez.app.ui.SharedViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -22,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/grey_E3E2E5"
-                tools:context=".ui.home.HomeFragment">
+                tools:context=".app.ui.home.HomeFragment">
 
                 <View
                     android:id="@+id/cl_top"
@@ -32,7 +34,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></View>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/tv_header"
@@ -110,12 +112,13 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
+                    submitData="@{viewModel.topRatedLiveData}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="@+id/guideline2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_top_rated"
-                    tools:listitem="@layout/item_movie_2" />
+                    tools:listitem="@layout/item_top_rated" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_now_playing"
@@ -158,7 +161,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_now_playing"
                     app:layout_constraintVertical_bias="0.0"
-                    tools:listitem="@layout/item_movie_2" />
+                    tools:listitem="@layout/item_top_rated" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_fav"
@@ -201,7 +204,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/guideline5"
                     app:layout_constraintVertical_bias="0.0"
-                    tools:listitem="@layout/item_movie_2" />
+                    tools:listitem="@layout/item_top_rated" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
