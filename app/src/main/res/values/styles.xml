@@ -29,4 +29,9 @@
     <style name="CurvedRect">
         <item name="cornerSize">4%</item>
     </style>
+
+    <style name="LeftCurvedRect">
+        <item name="cornerSizeBottomLeft">4%</item>
+        <item name="cornerSizeTopLeft">4%</item>
+    </style>
 </resources>

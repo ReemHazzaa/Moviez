@@ -5,38 +5,54 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
+import com.example.moviez.R
+import com.example.moviez.app.base.BaseFragment
+import com.example.moviez.app.ui.SharedViewModel
+import com.example.moviez.app.utils.genericadapter.Listable
+import com.example.moviez.app.utils.genericadapter.adapter.GeneralListAdapter
+import com.example.moviez.app.utils.genericadapter.listener.OnItemClickCallback
+import com.example.moviez.databinding.FragmentHomeBinding
 import com.example.moviez.databinding.FragmentTopRatedBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class TopRatedFragment : Fragment() {
+@AndroidEntryPoint
+class TopRatedFragment : BaseFragment<SharedViewModel, FragmentTopRatedBinding>() {
+    override val layoutResId: Int = R.layout.fragment_top_rated
+    override val mViewModel: SharedViewModel by viewModels()
 
-    private var _binding: FragmentTopRatedBinding? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getTopRated()
+    }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewDataBinding.apply {
+            setVariable(BR.viewModel, mViewModel)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val topRatedViewModel =
-            ViewModelProvider(this).get(TopRatedViewModel::class.java)
+            swipeRefresh.setOnRefreshListener {
+                swipeRefresh.isRefreshing = true
+                getTopRated()
+                swipeRefresh.isRefreshing = false
+            }
 
-        _binding = FragmentTopRatedBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+            rvMovies.adapter =
+                GeneralListAdapter(context = requireContext(), onItemClickCallback = object :
+                    OnItemClickCallback {
+                    override fun onItemClicked(view: View, listableItem: Listable, position: Int) {
 
-        val textView: TextView = binding.textDashboard
-        topRatedViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+                    }
+                })
         }
-        return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun getTopRated() {
+        mViewModel.getTopRated()
     }
+
 }
