@@ -24,7 +24,7 @@ class MovieDetailsViewModel @Inject constructor(
     val detailsLiveData: ObserveOnceLiveData<MovieDetailsItem> = ObserveOnceLiveData()
 
     fun getMovieDetails(id: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(getExceptionHandler()) {
             showProgress()
             detailsLiveData.value =
                 movieDetailsUseCase.execute(GetMovieDetailsUseCase.Params(movieId = id))
@@ -33,12 +33,12 @@ class MovieDetailsViewModel @Inject constructor(
     }
 
     fun addToFav(favMovieItem: FavMovieItem) =
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + getExceptionHandler()) {
             addToFavUseCase.execute(AddToFavUseCase.Params(favMovieItem))
         }
 
     fun removeItemFromFav(favMovieItem: FavMovieItem) =
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + getExceptionHandler()) {
             removeItemFromFavUseCase.execute(RemoveItemFromFavUseCase.Params(favMovieItem))
         }
 

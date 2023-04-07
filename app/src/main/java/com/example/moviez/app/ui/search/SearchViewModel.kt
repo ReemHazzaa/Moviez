@@ -21,7 +21,7 @@ class SearchViewModel @Inject constructor(
         includeAdult: Boolean,
         movieName: String
     ) {
-        viewModelScope.launch {
+        viewModelScope.launch(getExceptionHandler()) {
             showProgress()
             searchResultLiveData.value = searchByNameUseCase.execute(
                 SearchByNameUseCase.Params(

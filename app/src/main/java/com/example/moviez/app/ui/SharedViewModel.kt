@@ -23,7 +23,7 @@ class SharedViewModel @Inject constructor(
     val nowPlayingLiveData = ObserveOnceLiveData<List<MovieItem>>()
 
     fun getTopRated() {
-        viewModelScope.launch {
+        viewModelScope.launch(getExceptionHandler()) {
             showProgress()
             topRatedLiveData.value = topRatedUseCase.execute(GetTopRatedUseCase.Params(1))
             hideProgress()
@@ -31,7 +31,7 @@ class SharedViewModel @Inject constructor(
     }
 
     fun getNowPlaying() {
-        viewModelScope.launch {
+        viewModelScope.launch(getExceptionHandler()) {
             showProgress()
             nowPlayingLiveData.value = getNowPlayingUseCase.execute(GetNowPlayingUseCase.Params(1))
             hideProgress()

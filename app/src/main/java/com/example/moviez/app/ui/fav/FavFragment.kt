@@ -28,7 +28,7 @@ class FavFragment : BaseFragment<FavViewModel, FragmentFavBinding>() {
             setVariable(BR.viewModel, mViewModel)
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(mViewModel.getExceptionHandler()) {
             mViewModel.readAllFav().observe(viewLifecycleOwner) { fav ->
                 favAdapter.setData(fav)
                 viewDataBinding.rvCourses.adapter = favAdapter
