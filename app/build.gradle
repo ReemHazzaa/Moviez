@@ -25,6 +25,16 @@ android {
         buildConfigField "String", "API_KEY", getProperty("api.key")
     }
 
+    flavorDimensions "paidMode"
+    productFlavors {
+        Premium {
+            dimension "paidMode"
+        }
+        Freemium {
+            dimension "paidMode"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
